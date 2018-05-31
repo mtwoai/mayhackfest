@@ -29,6 +29,8 @@ STRUCTURE_CODE_COLUMN = 'Structure Code'
 STOP_WORDS = ['/', '=', '+', '*', ',']
 TOP_N = 3
 
+IGNOR_FAKE_MODEL = True
+
 
 def _normalized(str):
     for word in STOP_WORDS:
@@ -65,6 +67,8 @@ def main():
         logger.debug(prcstructures_df[STRUCTURE_DESC_COLUMN][i])
 
     for model_file in os.listdir(BIN_MODEL_DIR):
+        if model_file.startswith('fake_model') and IGNOR_FAKE_MODEL:
+            continue
         logger.info("Loading model file {}".format(model_file))
         w2v_model = KeyedVectors.load_word2vec_format(BIN_MODEL_DIR + "\\" + model_file, binary=True)
         model = Phrase2VecByMean(w2v_model)
@@ -73,6 +77,8 @@ def main():
         print("{}\t{}\t{}/{}\t{}".format("Phrase2VecByMean", model_file, correct_count, material_group_count, correct_count * 1.0 / material_group_count))
 
     for model_file in os.listdir(TXT_MODEL_DIR):
+        if model_file.startswith('fake_model') and IGNOR_FAKE_MODEL:
+            continue
         logger.info("Loading model file {}".format(model_file))
         w2v_model = KeyedVectors.load_word2vec_format(TXT_MODEL_DIR + "\\" + model_file, binary=False)
         model = Phrase2VecByMean(w2v_model)

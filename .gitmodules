@@ -1,6 +1,4 @@
-[submodule "aml-keras-image-recognition"]
-	path = aml-keras-image-recognition
-	url = https://github.com/fujikosu/aml-keras-image-recognition
-[submodule "word2vec_train_parameter_sweeping"]
-	path = word2vec_train_parameter_sweeping
-	url = https://github.com/fujikosu/word2vec_train_parameter_sweeping
+[submodule "evaluation/word2vec_train_parameter_sweeping"]
+	path = evaluation/word2vec_train_parameter_sweeping
+	url = https://github.com/fujikosu/word2vec_train_parameter_sweeping.git
+
