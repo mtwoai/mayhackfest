@@ -11,13 +11,13 @@ def golve2w2v(src_dir, dst_dir):
 
 
 def w2v_txt2bin(src_file, dst_file):
-    model = KeyedVectors.load_word2vec_format(src_file, binary=True)
-    model.save_word2vec_format(dst_file, binary=False)
+    model = KeyedVectors.load_word2vec_format(src_file, binary=False)
+    model.save_word2vec_format(dst_file, binary=True)
 
 
 def w2v_bin2txt(src_file, dst_file):
-    model = KeyedVectors.load_word2vec_format(src_file, binary=False)
-    model.save_word2vec_format(dst_file, binary=True)
+    model = KeyedVectors.load_word2vec_format(src_file, binary=True)
+    model.save_word2vec_format(dst_file, binary=False)
 
 
 if __name__ == '__main__':
@@ -25,4 +25,5 @@ if __name__ == '__main__':
     # w2v_bin2txt('models/txt/fake_model.txt', 'models/bin/fake_model.bin')
     
     for file in os.listdir('models/txt'):
-        print(file)
+        if not file.startswith('fake'):
+            w2v_txt2bin('models/txt/' + file, 'models/bin/' + file)
